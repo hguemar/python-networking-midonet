@@ -3,45 +3,40 @@
 %global docpath doc/build/html
 
 Name:           python-%{srcname}		
-Version:        2015.2.2
+Version:        2014.2.2
 Release:	    1%{?dist}
+Provides:       python-%{srcname} = %{version}-%{release}
 Summary:        %{vendor} OpenStack Neutron driver	
 
+Group:          Applications/System
 License:        ASL 2.0
 URL:	        https://pypi.python.org/pypi/%{srcname}
 Source0:	    https://pypi.python.org/packages/source/n/%{srcname}/%{srcname}-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:	python2-devel
-BuildRequires:	python-oslolog
-BuildRequires:  python-neutron
+Requires:       python-neutron
 Requires:	    python-babel
 Requires:       python-pbr
 
 %description
 This package provides %{vendor} networking driver for OpenStack Neutron
 
-
 %prep
-%setup -q -n %{srcname}-%{upstream_version}
+%setup -q -n %{srcname}-%{version}
 
 
 %build
-%configure
 rm requirements.txt test-requirements.txt
 %{__python2} setup.py build
-%{__python2} setup.py build_sphinx
-rm %{docpath}/.buildinfo
-
 
 %install
 export PBR_VERSION=%{version}
 export SKIP_PIP_INSTALL=1
 %{__python2} setup.py install --skip-build --root $RPM_BUILD_ROOT
 
-
 %files
-%doc LICENSE
-%doc %{docpath}
-%{python2_sitelib}/%{srcname}
-%{python2_sitelib}/%{srcname}-%{version}-py%{python2_version}.egg-info
+%license LICENSE
+%{python2_sitelib}/midonet
+%{python2_sitelib}/networking_midonet-%{version}-py%{python2_version}.egg-info
+%{_bindir}/midonet-db-manage
