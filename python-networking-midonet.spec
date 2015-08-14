@@ -8,7 +8,7 @@ Summary:        %{vendor} OpenStack Neutron driver
 
 License:        ASL 2.0
 URL:            https://www.midonet.org/
-Source0:        https://pypi.python.org/packages/source/n/%{srcname}/%{srcname}-%{version}.tar.gz
+Source0:        https://github.com/openstack/%{name}/archive/%{upstream_version}.tar.gz#/%{name}-%{upstream_version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
